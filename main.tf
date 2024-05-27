@@ -40,6 +40,14 @@ resource "aws_instance" "main" {
   tags = {
     Name = "${var.name}-${var.env}"
   }
+
+  # this to not re-create machines on tf-apply again and again. This will not be needed later when we go with ASG
+  lifecycle {
+    ignore_changes = [
+      "ami"
+    ]
+  }
+
 }
 
 resource "aws_route53_record" "main" {
