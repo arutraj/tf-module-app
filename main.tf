@@ -41,8 +41,10 @@ resource "aws_instance" "main" {
   vpc_security_group_ids = [aws_security_group.main.id]
 
   tags = {
-    Name = "${var.name}-${var.env}"
-    Monitor = "yes"
+    Name      = "${var.name}-${var.env}"
+    Monitor   = "yes"
+    env       = var.env
+    component = var.name
   }
 
   # this to not re-create machines on tf-apply again and again. This will not be needed later when we go with ASG
