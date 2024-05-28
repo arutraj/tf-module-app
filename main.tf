@@ -3,27 +3,27 @@ resource "aws_security_group" "main" {
   description = "${var.name}-${var.env}"
 
   ingress {
-    from_port        = 22
-    to_port          = 22
-    protocol         = "tcp"
-    cidr_blocks      = ["0.0.0.0/0"]
-    description      = "SSH Port"
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+    description = "SSH Port"
   }
 
   ingress {
-    from_port        = var.port_no
-    to_port          = var.port_no
-    protocol         = "tcp"
-    cidr_blocks      = ["0.0.0.0/0"]
-    description      = "App Port"
+    from_port   = var.port_no
+    to_port     = var.port_no
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+    description = "App Port"
   }
 
   ingress {
-    from_port        = 9100
-    to_port          = 9100
-    protocol         = "tcp"
-    cidr_blocks      = var.prometheus_servers
-    description      = "Prometheus Port"
+    from_port   = 9100
+    to_port     = 9100
+    protocol    = "tcp"
+    cidr_blocks = var.prometheus_servers
+    description = "Prometheus Port"
   }
 
   egress {
@@ -69,10 +69,10 @@ resource "null_resource" "main" {
   }
 
   connection {
-    host        = aws_instance.main.private_ip
-    user        = "ec2-user"
-    password    = var.SSH_PASSWORD
-    type        = "ssh"
+    host     = aws_instance.main.private_ip
+    user     = "ec2-user"
+    password = var.SSH_PASSWORD
+    type     = "ssh"
   }
 
   provisioner "remote-exec" {
