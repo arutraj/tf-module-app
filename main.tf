@@ -42,7 +42,6 @@ resource "aws_security_group_rule" "nginx-exporter-port" {
   to_port           = 8113
   protocol          = "tcp"
   cidr_blocks       = var.prometheus_servers
-  ipv6_cidr_blocks  = var.prometheus_servers
   security_group_id = aws_security_group.main.id
 }
 
